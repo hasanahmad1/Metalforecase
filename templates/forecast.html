@@ -1,0 +1,133 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<style>
+  /* Custom styles for forecast list */
+  .forecast-list {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .forecast-list li {
+    font-weight: 500;
+    font-size: 1.15rem;
+    color: #343a40;
+    margin-bottom: 0.25rem;
+  }
+  .plot-container img {
+    max-height: 400px;
+    border-radius: 0.375rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .alert {
+    max-width: 600px;
+    margin: 1rem auto;
+  }
+</style>
+
+<h2 class="mb-4 text-center text-primary fw-bold">Forecast Gold & Silver Prices</h2>
+
+{% if error %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert" aria-live="assertive" aria-atomic="true">
+  <strong>Error!</strong> {{ error }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+<form method="post" class="mb-5 needs-validation" novalidate id="forecastForm" aria-describedby="formInstructions">
+  <div id="formInstructions" class="visually-hidden">
+    Select metal, forecasting model, and forecast horizon between 1 and 30 days.
+  </div>
+  <div class="row g-4">
+    <div class="col-md-3">
+      <label for="metal" class="form-label fw-semibold">Select Metal</label>
+      <select id="metal" name="metal" class="form-select" required aria-required="true" aria-describedby="metalHelp">
+        <option value="" disabled {% if not metal %}selected{% endif %}>Choose...</option>
+        <option value="Gold" {% if metal == 'Gold' %}selected{% endif %}>Gold</option>
+        <option value="Silver" {% if metal == 'Silver' %}selected{% endif %}>Silver</option>
+      </select>
+      <div id="metalHelp" class="invalid-feedback">Please select a metal.</div>
+    </div>
+
+    <div class="col-md-3">
+      <label for="model" class="form-label fw-semibold">Select Model</label>
+      <select id="model" name="model" class="form-select" required aria-required="true" aria-describedby="modelHelp">
+        <option value="" disabled {% if not model %}selected{% endif %}>Choose...</option>
+        <option value="ARIMA" {% if model == 'ARIMA' %}selected{% endif %}>ARIMA</option>
+        <option value="RandomForest" {% if model == 'RandomForest' %}selected{% endif %}>Random Forest</option>
+        <option value="LSTM" {% if model == 'LSTM' %}selected{% endif %}>LSTM</option>
+      </select>
+      <div id="modelHelp" class="invalid-feedback">Please select a forecasting model.</div>
+    </div>
+
+    <div class="col-md-3">
+      <label for="horizon" class="form-label fw-semibold">Forecast Horizon (days)</label>
+      <input type="number" id="horizon" name="horizon" min="1" max="30" class="form-control" 
+             value="{{ horizon or 7 }}" required aria-required="true" aria-describedby="horizonHelp" />
+      <div id="horizonHelp" class="invalid-feedback">Please enter a number between 1 and 30.</div>
+    </div>
+
+    <div class="col-md-3 d-flex align-items-end">
+      <button type="submit" class="btn btn-success w-100" id="submitBtn" aria-live="polite" aria-busy="false">
+        <span id="btnText">Predict</span>
+        <span class="spinner-border spinner-border-sm ms-2 d-none" role="status" aria-hidden="true" id="loadingSpinner"></span>
+      </button>
+    </div>
+  </div>
+</form>
+
+{% if plot_url %}
+<div class="card shadow-sm mb-5">
+  <div class="card-body">
+    <h4 class="card-title mb-3 text-center text-secondary">
+      Forecast Results for <span class="fw-bold">{{ metal }}</span> using <span class="fw-bold">{{ model }}</span>
+    </h4>
+    <div class="plot-container text-center mb-4">
+      <img src="data:image/png;base64,{{ plot_url }}" alt="Forecast plot for {{ metal }} using {{ model }}">
+    </div>
+    <h5 class="text-center mb-3 fw-semibold">Predicted Prices for Next {{ horizon }} Days:</h5>
+    <ul class="forecast-list" aria-live="polite" aria-relevant="additions">
+      {% for price in forecast %}
+      <li>{{ price | round(2) }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+
+<script>
+  // Bootstrap form validation + disable button on submit with spinner
+  (() => {
+    'use strict'
+    const form = document.querySelector('#forecastForm')
+    const submitBtn = document.querySelector('#submitBtn')
+    const btnText = document.querySelector('#btnText')
+    const spinner = document.querySelector('#loadingSpinner')
+
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      } else {
+        // Disable button and show spinner on valid submit
+        submitBtn.disabled = true
+        btnText.textContent = 'Predicting...'
+        spinner.classList.remove('d-none')
+        submitBtn.setAttribute('aria-busy', 'true')
+      }
+      form.classList.add('was-validated')
+    })
+
+    // Reset button on page load in case of server error display
+    window.addEventListener('load', () => {
+      submitBtn.disabled = false
+      btnText.textContent = 'Predict'
+      spinner.classList.add('d-none')
+      submitBtn.setAttribute('aria-busy', 'false')
+    })
+  })()
+</script>
+
+{% endblock %}

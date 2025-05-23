@@ -1,0 +1,168 @@
+/* ===== Sticky Footer Setup ===== */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa; /* Light background for contrast */
+  color: #212529; /* Default Bootstrap text color */
+}
+
+/* Main content container flex-grow to push footer down */
+.container.my-5 {
+  flex: 1 0 auto;
+}
+
+/* Footer styles */
+footer {
+  flex-shrink: 0;
+  background-color: #1a1a1a; /* Dark charcoal background */
+  color: #fff !important; /* Force all footer text white */
+  text-align: center;
+  padding: 2rem 0 1.5rem 0;
+  font-size: 0.9rem;
+  user-select: none;
+  border-top: 1px solid #444; /* subtle border */
+}
+
+/* Force all text inside footer to white */
+footer * {
+  color: #fff !important;
+}
+
+/* Footer links */
+footer a.footer-link {
+  color: #fff !important; /* White links */
+  font-size: 0.95rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+footer a.footer-link:hover,
+footer a.footer-link:focus {
+  color: #0d6efd !important; /* Blue on hover */
+  text-decoration: underline;
+}
+
+/* Footer social icons */
+footer a.footer-social {
+  color: #fff !important; /* White social icons */
+  transition: color 0.3s ease;
+  margin-right: 1rem;
+}
+
+footer a.footer-social:hover,
+footer a.footer-social:focus {
+  color: #0d6efd !important; /* Blue on hover */
+  text-decoration: none;
+}
+
+/* Footer paragraph and headings */
+footer p,
+footer h5,
+footer h6,
+footer small {
+  color: #fff !important; /* All footer text white */
+}
+
+/* ===== Additional General Styles ===== */
+
+/* Links */
+a {
+  color: #0d6efd;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+a:hover, a:focus {
+  text-decoration: underline;
+  color: #0a58ca;
+  outline: none;
+}
+
+/* Navbar brand */
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.05rem;
+}
+
+/* Active nav-link highlight */
+.nav-link.active {
+  font-weight: 600;
+  color: #0d6efd !important;
+}
+
+/* Cards rounded and shadow for all cards */
+.card {
+  border-radius: 0.75rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* Buttons smooth transition */
+.btn {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover, .btn:focus {
+  box-shadow: 0 0.25rem 0.5rem rgba(13, 110, 253, 0.4);
+  outline: none;
+}
+
+/* Form inputs consistent padding */
+.form-control, .form-select {
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+}
+
+/* Responsive container padding */
+@media (max-width: 576px) {
+  .container.my-5 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+.logo-link {
+  background: #0d6efd22; /* subtle blue background */
+  padding: 4px 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  color: white !important;
+}
+
+.text-muted {
+  color: #555 !important;
+}
+
+/* Make testimonial text darker */
+.testimonial-card .card-body,
+.card-text,
+.fst-italic.text-secondary {
+  color: #333 !important;
+}
+
+/* Navbar brand color override */
+.navbar-brand.logo-link {
+  color: white !important;
+}
+
+.logo-link:hover {
+  background: #0d6efd55; /* stronger blue on hover */
+  text-decoration: none;
+}
+
+.logo-link i {
+  transition: transform 0.3s ease;
+}
+
+.logo-link:hover i {
+  transform: rotate(10deg) scale(1.1);
+}

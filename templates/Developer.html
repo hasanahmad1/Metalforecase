@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<style>
+  .developer-card {
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+    padding: 30px;
+    background: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .developer-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.25);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .dev-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    user-select: none;
+    font-weight: 700;
+  }
+
+  .dev-avatar.green {
+    background-color: #28a745;
+  }
+
+  .dev-name {
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .dev-role {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+  }
+
+  .dev-bio {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.5;
+  }
+</style>
+
+<div class="container py-5">
+  <h2 class="text-center mb-5 fw-bold">Meet Our Developers</h2>
+
+  <div class="row justify-content-center g-5">
+
+    <!-- Developer 1 Card -->
+    <div class="col-md-6">
+      <a href="{{ url_for('portfolio_simranjeet') }}" class="developer-card d-block text-center">
+        <div class="dev-avatar mx-auto">
+          SK
+        </div>
+        <h3 class="dev-name">Simranjeet Kaur</h3>
+        <p class="dev-role">Full Stack Developer</p>
+        <p class="dev-bio">
+          Passionate about building scalable web applications and AI-powered solutions. Skilled in MERN stack and cloud technologies.
+        </p>
+      </a>
+    </div>
+
+    <!-- Developer 2 Card -->
+    <div class="col-md-6">
+      <a href="{{ url_for('portfolio_akshaykumar') }}" class="developer-card d-block text-center">
+        <div class="dev-avatar green mx-auto">
+          AP
+        </div>
+        <h3 class="dev-name">Akshaykumar Pravinbhai Patel</h3>
+        <p class="dev-role">Backend Developer</p>
+        <p class="dev-bio">
+          Experienced in building robust backend systems using Python and Node.js, with a focus on performance and security.
+        </p>
+      </a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

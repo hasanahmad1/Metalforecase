@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container py-5">
+  <h1 class="mb-4 fw-bold">API Documentation</h1>
+  <p class="lead text-muted">
+    Welcome to the ForecastApp API documentation. Here you’ll find all the details you need to integrate our forecasting models into your own applications.
+  </p>
+
+  <section class="mt-5">
+    <h2 class="fw-semibold mb-3">Base URL</h2>
+    <pre class="bg-light p-3 rounded">https://yourdomain.com/api/v1/</pre>
+  </section>
+
+  <section class="mt-4">
+    <h2 class="fw-semibold mb-3">Authentication</h2>
+    <p>
+      API access requires an API key which should be sent via the <code>Authorization</code> header:
+    </p>
+    <pre class="bg-light p-3 rounded">Authorization: Bearer YOUR_API_KEY</pre>
+    <p>
+      Contact our support team to request an API key.
+    </p>
+  </section>
+
+  <section class="mt-4">
+    <h2 class="fw-semibold mb-3">Endpoints</h2>
+
+    <h5 class="mt-3">1. Get Forecast</h5>
+    <p><strong>POST</strong> <code>/forecast</code></p>
+    <p>Request a forecast for a given metal, model, and horizon.</p>
+
+    <h6>Request Body (JSON):</h6>
+    <pre class="bg-light p-3 rounded">
+{
+  "metal": "gold" | "silver",
+  "model": "ARIMA" | "RandomForest" | "LSTM",
+  "horizon": integer (1-30)
+}
+    </pre>
+
+    <h6>Response (JSON):</h6>
+    <pre class="bg-light p-3 rounded">
+{
+  "status": "success",
+  "metal": "gold",
+  "model": "ARIMA",
+  "horizon": 7,
+  "forecast": [1800.25, 1798.50, 1795.75, 1792.80, 1790.10, 1788.50, 1786.75]
+}
+    </pre>
+
+    <h6>Example Curl:</h6>
+    <pre class="bg-light p-3 rounded">
+curl -X POST https://yourdomain.com/api/v1/forecast \
+-H "Authorization: Bearer YOUR_API_KEY" \
+-H "Content-Type: application/json" \
+-d '{"metal":"gold","model":"ARIMA","horizon":7}'
+    </pre>
+  </section>
+
+  <section class="mt-4">
+    <h2 class="fw-semibold mb-3">Error Handling</h2>
+    <p>Errors will be returned in the following format:</p>
+    <pre class="bg-light p-3 rounded">
+{
+  "status": "error",
+  "message": "Description of the error"
+}
+    </pre>
+  </section>
+
+  <section class="mt-5">
+    <h2 class="fw-semibold mb-3">Support</h2>
+    <p>
+      If you have any questions or need help integrating the API, please contact our support team at
+      <a href="mailto:support@forecastapp.com">support@forecastapp.com</a>.
+    </p>
+  </section>
+</div>
+{% endblock %}

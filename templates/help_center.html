@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container py-5">
+  <h1 class="mb-4 fw-bold">Help Center</h1>
+  <p class="lead text-muted">
+    Find answers to frequently asked questions and get help with using ForecastApp.
+  </p>
+
+  <section class="mt-5">
+    <h2 class="fw-semibold mb-3">Frequently Asked Questions (FAQ)</h2>
+    <div class="accordion" id="faqAccordion">
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faqHeadingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseOne" aria-expanded="true" aria-controls="faqCollapseOne">
+            How do I get started with ForecastApp?
+          </button>
+        </h2>
+        <div id="faqCollapseOne" class="accordion-collapse collapse show" aria-labelledby="faqHeadingOne" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Simply create an account, log in, and navigate to the Forecast page. Select the metal, forecasting model, and horizon, then click “Predict” to get started.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faqHeadingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseTwo" aria-expanded="false" aria-controls="faqCollapseTwo">
+            What forecasting models are available?
+          </button>
+        </h2>
+        <div id="faqCollapseTwo" class="accordion-collapse collapse" aria-labelledby="faqHeadingTwo" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            We offer ARIMA, Random Forest, and LSTM models, each suited for different forecasting needs. Learn more about each in the <a href="{{ url_for('about') }}">About</a> page.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faqHeadingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseThree" aria-expanded="false" aria-controls="faqCollapseThree">
+            How accurate are the forecasts?
+          </button>
+        </h2>
+        <div id="faqCollapseThree" class="accordion-collapse collapse" aria-labelledby="faqHeadingThree" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Our models are trained on historical market data and continuously updated. Accuracy varies by model and market conditions, but we strive to provide the most reliable predictions possible.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faqHeadingFour">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFour" aria-expanded="false" aria-controls="faqCollapseFour">
+            Can I integrate ForecastApp forecasts into my own application?
+          </button>
+        </h2>
+        <div id="faqCollapseFour" class="accordion-collapse collapse" aria-labelledby="faqHeadingFour" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Yes! We provide a REST API for easy integration. Visit our <a href="{{ url_for('api_docs') }}">API Documentation</a> page for details on endpoints and authentication.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faqHeadingFive">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFive" aria-expanded="false" aria-controls="faqCollapseFive">
+            How do I contact support?
+          </button>
+        </h2>
+        <div id="faqCollapseFive" class="accordion-collapse collapse" aria-labelledby="faqHeadingFive" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            You can reach out to us anytime at <a href="mailto:support@forecastapp.com">support@forecastapp.com</a>. We aim to respond within 24 hours.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="mt-5">
+    <h2 class="fw-semibold mb-3">Additional Resources</h2>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><a href="{{ url_for('privacy') }}">Privacy Policy</a></li>
+      <li class="list-group-item"><a href="{{ url_for('api_docs') }}">API Documentation</a></li>
+      <li class="list-group-item"><a href="{{ url_for('contact') }}">Contact Support</a></li>
+    </ul>
+  </section>
+</div>
+{% endblock %}
